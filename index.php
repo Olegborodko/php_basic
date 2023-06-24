@@ -206,7 +206,8 @@ for ($i = 1; $i < 10; $i++) {
 
 // ======================= function
 //функция должна возвращать какое-то значение обычно
-function sum($a = 1, $b = 1){
+function sum($a = 1, $b = 1)
+{
   echo "<br>";
   echo $a + $b;
 }
@@ -217,8 +218,9 @@ sum(4, 5);
 //так можно проверять если ли уже функция такая
 //и если нет то создавать
 //но думаю лучше юзать классы например
-if (!function_exists("sum")){
-  function sum($a = 1, $b = 1){
+if (!function_exists("sum")) {
+  function sum($a = 1, $b = 1)
+  {
     echo "<br>";
     echo $a + $b;
   }
@@ -261,5 +263,39 @@ echo $result;
 $text = "<i>hello</i>, <b>one</b>";
 echo "<br><br>strip_tags<br>";
 echo strip_tags($text, ['<b>', '<i>']);
+
+//============================empty
+// пустое значение только когда false или 
+echo "<br><br>empty<br>";
+if (!empty(false)) { // empty
+  echo "empty 1";
+  echo "<br>";
+}
+
+if (!empty(true)) { // not empty
+  echo "empty 2";
+  echo "<br>";
+}
+
+if (!empty($emmm)) { // empty
+  echo "empty 3";
+  echo "<br>";
+}
+
+if (!empty(0)) { // empty
+  echo "empty 4";
+  echo "<br>";
+}
+
+if (!empty("")){ // empty
+  echo "empty 5";
+  echo "<br>";
+}
+
+if (!empty(1)){ // not empty
+  echo "empty 6";
+  echo "<br>";
+}
+
 
 ?>
