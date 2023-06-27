@@ -1,20 +1,30 @@
 <?php
 require_once '../mysql/db.php';
 
-$name = mysqli_real_escape_string($conn, $_POST['name']);
-$email = mysqli_real_escape_string($conn, $_POST['email']);
-$date = mysqli_real_escape_string($conn, $_POST['date']);
+if (!empty($_POST)) {
+  foreach ($_POST as $key => $value) {
+    $_POST[$key] = mysqli_real_escape_string($conn, $value);
+  }
 
-$sql = "INSERT INTO `team`(`name`, `email`, `data`) VALUES ('$name','$email','$date')";
+  // вместо создания отдельно переменных, юзаем extract
+  extract($_POST);
 
-$message = 'success';
-try {
-  $result = $conn->query($sql); // true
-} catch (Exception $e) {
-  global $conn, $message;
-  $message = $conn->error;
+  // $name = mysqli_real_escape_string($conn, $_POST['name']);
+  // $email = mysqli_real_escape_string($conn, $_POST['email']);
+  // $date = mysqli_real_escape_string($conn, $_POST['date']);
 
-  echo $conn->error;
+  $sql = "INSERT INTO `team`(`name`, `email`, `data`) VALUES ('$name','$email','$date')";
+
+  $message = 'success';
+  try {
+    $result = $conn->query($sql); // true
+  } catch (Exception $e) {
+    global $conn, $message;
+    $message = $conn->error;
+
+    echo $conn->error;
+  }
+
+  header("Location: show_data.php?message=$message");
+
 }
-
-header("Location: show_data.php?message=$message");
